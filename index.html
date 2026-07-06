@@ -5,169 +5,127 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title>Ledger — voedingsdagboek</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F3F5EF;
-    --paper-raised:#FFFFFF;
-    --ink:#1F2A24;
-    --ink-soft:#5B6660;
-    --hairline:#D9DED4;
-    --tomato:#C4402D;
-    --basil:#4C7A5E;
-    --basil-soft:#E7EFE9;
-    --amber:#B8863B;
-    --amber-soft:#F5EAD6;
-    --teal:#2F7A82;
-    --teal-soft:#E0EEEF;
-    --plum:#7A5B8A;
-    --plum-soft:#EEE6F0;
-    --slate:#5B6D82;
-    --slate-soft:#E4E9EF;
+    --bg-a:#FDF6FF;
+    --bg-b:#EFF3FF;
+    --card:#FFFFFF;
+    --ink:#2A2140;
+    --ink-soft:#7A7290;
+    --hairline:#EAE3F5;
+
+    --coral:#FF7F66;
+    --coral-soft:#FFE7E1;
+    --mint:#2BBF9E;
+    --mint-soft:#DBF6EF;
+    --gold:#FFB03B;
+    --gold-soft:#FFF1D9;
+    --lav:#A97FE0;
+    --lav-soft:#F1E7FB;
+    --warn:#FF5C7A;
+    --warn-soft:#FFE3E9;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--paper);
+    background:linear-gradient(160deg, var(--bg-a) 0%, var(--bg-b) 100%);
+    background-attachment:fixed;
     color:var(--ink);
-    font-family:'Public Sans',sans-serif;
+    font-family:'Poppins',sans-serif;
     -webkit-font-smoothing:antialiased;
     min-height:100vh;
     padding-bottom:80px;
   }
-  .wrap{
-    max-width:560px;
-    margin:0 auto;
-    padding:28px 20px 40px;
-  }
+  .wrap{max-width:560px;margin:0 auto;padding:28px 20px 40px;}
   header{margin-bottom:18px;}
   .eyebrow{
     font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    margin:0 0 4px;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);margin:0 0 4px;
   }
   h1{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    font-size:34px;
-    margin:0;
-    letter-spacing:-.01em;
+    font-family:'Fredoka',sans-serif;
+    font-weight:600;font-size:32px;margin:0;letter-spacing:-.01em;color:var(--ink);
   }
 
-  /* Tabs */
-  .tabs{
-    display:flex;
-    gap:6px;
-    margin-top:18px;
-    border-bottom:1px solid var(--hairline);
-  }
+  .tabs{display:flex;gap:6px;margin-top:18px;border-bottom:2px solid var(--hairline);}
   .tab{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    padding:10px 4px;
-    color:var(--ink-soft);
-    cursor:pointer;
-    border-bottom:2px solid transparent;
-    margin-right:16px;
+    font-family:'Fredoka',sans-serif;
+    font-size:14px;padding:9px 6px;color:var(--ink-soft);cursor:pointer;
+    border-bottom:3px solid transparent;margin-right:18px;font-weight:600;
   }
-  .tab.active{color:var(--ink);border-bottom-color:var(--tomato);font-weight:600;}
+  .tab.active{color:var(--coral);border-bottom-color:var(--coral);}
 
   .view{display:none;}
   .view.active{display:block;}
 
   /* Day navigator */
   .day-nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:var(--paper-raised);
-    border:1px solid var(--hairline);
-    border-radius:12px;
-    padding:8px 10px;
-    margin-top:16px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--card);border:none;box-shadow:0 4px 14px rgba(120,90,180,0.08);
+    border-radius:16px;padding:8px 10px;margin-top:16px;
   }
   .day-nav button{
-    background:none;
-    border:none;
-    color:var(--ink);
-    font-size:18px;
-    width:36px;
-    height:36px;
-    border-radius:8px;
-    cursor:pointer;
+    background:none;border:none;color:var(--lav);font-size:18px;
+    width:36px;height:36px;border-radius:10px;cursor:pointer;
   }
-  .day-nav button:hover{background:var(--basil-soft);}
+  .day-nav button:hover{background:var(--lav-soft);}
   .day-nav button:disabled{opacity:.3;cursor:default;background:none;}
   .day-nav-center{text-align:center;flex:1;}
-  .day-nav-label{font-family:'Fraunces',serif;font-weight:600;font-size:17px;}
+  .day-nav-label{font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;}
   .day-nav-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:1px;}
   .today-jump{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    text-align:center;
-    color:var(--basil);
-    cursor:pointer;
-    margin-top:8px;
-    text-decoration:underline;
-    text-underline-offset:2px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:center;
+    color:var(--mint);cursor:pointer;margin-top:8px;text-decoration:underline;text-underline-offset:2px;
   }
 
   /* Log input */
   .log-box{
-    background:var(--paper-raised);
-    border:1px solid var(--hairline);
-    border-radius:14px;
-    padding:14px;
-    margin:20px 0 22px;
+    background:var(--card);border:none;box-shadow:0 4px 14px rgba(120,90,180,0.08);
+    border-radius:18px;padding:14px;margin:20px 0 22px;
   }
   .log-box textarea{
-    width:100%;border:none;resize:none;
-    font-family:'Public Sans',sans-serif;font-size:16px;color:var(--ink);
-    background:transparent;min-height:52px;line-height:1.4;
+    width:100%;border:none;resize:none;font-family:'Poppins',sans-serif;
+    font-size:16px;color:var(--ink);background:transparent;min-height:52px;line-height:1.4;
   }
   .log-box textarea:focus{outline:none;}
-  .log-box textarea::placeholder{color:#9AA39A;}
+  .log-box textarea::placeholder{color:#B9B2CC;}
   .log-actions{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:6px;}
   .hint{font-size:12px;color:var(--ink-soft);margin-right:auto;}
   button.primary{
-    background:var(--ink);color:var(--paper);border:none;border-radius:9px;
-    padding:10px 18px;font-family:'Public Sans',sans-serif;font-weight:600;font-size:14px;
-    cursor:pointer;transition:opacity .15s ease;
+    background:linear-gradient(135deg, var(--coral), var(--lav));
+    color:#fff;border:none;border-radius:12px;padding:10px 20px;
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;cursor:pointer;
+    transition:transform .15s ease, opacity .15s ease;
   }
-  button.primary:hover{opacity:.85;}
-  button.primary:disabled{opacity:.5;cursor:default;}
+  button.primary:hover{transform:translateY(-1px);}
+  button.primary:disabled{opacity:.5;cursor:default;transform:none;}
 
-  /* Nutrition facts panel — styled like a real label */
-  .facts{
-    background:var(--paper-raised);
-    border:2px solid var(--ink);
-    border-radius:10px;
-    padding:16px 18px;
-    margin-bottom:26px;
+  /* Guideline bars */
+  .bars-card{
+    background:var(--card);border:none;box-shadow:0 4px 14px rgba(120,90,180,0.08);
+    border-radius:18px;padding:18px;margin-bottom:20px;
   }
-  .facts-title{
-    font-family:'Fraunces',serif;font-weight:600;font-size:20px;
-    border-bottom:8px solid var(--ink);padding-bottom:6px;margin-bottom:4px;
+  .bars-card-title{
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:18px;margin-bottom:2px;
   }
-  .facts-row{
-    display:flex;justify-content:space-between;align-items:baseline;
-    padding:6px 0;border-bottom:1px solid var(--hairline);
-    font-family:'IBM Plex Mono',monospace;
+  .bars-card-sub{font-size:11px;color:var(--ink-soft);margin-bottom:14px;}
+  .bars-card-sub a{color:var(--lav);cursor:pointer;text-decoration:underline;}
+
+  .bar-row{margin-bottom:14px;}
+  .bar-row:last-child{margin-bottom:0;}
+  .bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+  .bar-label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .bar-value{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);font-variant-numeric:tabular-nums;
   }
-  .facts-row:last-child{border-bottom:none;}
-  .facts-row.sub{padding-left:14px;}
-  .facts-row.sub .label{color:var(--ink-soft);font-size:12px;}
-  .facts-row .label{font-size:13px;color:var(--ink-soft);font-family:'Public Sans',sans-serif;}
-  .facts-row .value{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;}
-  .facts-row.sub .value{font-size:13px;font-weight:500;}
-  .facts-row.total{border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:2px;}
-  .facts-row.total .label{color:var(--ink);font-weight:600;}
-  .facts-row.total .value{color:var(--tomato);font-size:20px;}
+  .bar-value.over{color:var(--warn);font-weight:600;}
+  .bar-track{
+    height:12px;background:var(--hairline);border-radius:20px;overflow:hidden;position:relative;
+  }
+  .bar-fill{height:100%;border-radius:20px;transition:width .4s ease;}
+  .bars-sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--hairline);}
 
   /* Entries */
   .entries-title{
@@ -177,79 +135,71 @@
   }
   .entries-title::after{content:'';flex:1;height:1px;background:var(--hairline);}
   .entry{
-    background:var(--paper-raised);border:1px solid var(--hairline);
-    border-radius:12px;padding:13px 15px;margin-bottom:10px;
+    background:var(--card);border:none;box-shadow:0 3px 10px rgba(120,90,180,0.06);
+    border-radius:16px;padding:13px 15px;margin-bottom:10px;
   }
   .entry-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-  .entry-desc{font-family:'Fraunces',serif;font-size:16px;font-style:italic;color:var(--ink);flex:1;}
-  .entry-cals{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;color:var(--tomato);white-space:nowrap;}
+  .entry-desc{font-family:'Fredoka',sans-serif;font-size:16px;color:var(--ink);flex:1;}
+  .entry-cals{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;color:var(--coral);white-space:nowrap;}
   .entry-items{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;}
-  .pill{font-size:12px;font-family:'IBM Plex Mono',monospace;padding:4px 9px;border-radius:20px;}
-  .entry-time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#AAB2A9;margin-top:8px;}
+  .pill{font-size:12px;font-family:'IBM Plex Mono',monospace;padding:4px 10px;border-radius:20px;}
+  .entry-time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#C7C0D8;margin-top:8px;}
   .entry-delete{
-    background:none;border:none;color:#AAB2A9;font-size:12px;cursor:pointer;
+    background:none;border:none;color:#C7C0D8;font-size:12px;cursor:pointer;
     font-family:'IBM Plex Mono',monospace;margin-top:8px;padding:0;
   }
-  .entry-delete:hover{color:var(--tomato);}
+  .entry-delete:hover{color:var(--warn);}
   .empty{text-align:center;color:var(--ink-soft);font-size:14px;padding:30px 0;}
 
-  /* Category legend */
   .legend{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;}
   .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;}
   .legend-dot{width:8px;height:8px;border-radius:50%;}
 
-  /* Progress view */
-  .goal-box{
-    background:var(--paper-raised);border:1px solid var(--hairline);
-    border-radius:14px;padding:14px 16px;margin:18px 0 22px;
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-  }
-  .goal-box label{font-size:13px;color:var(--ink-soft);}
-  .goal-box .goal-input-row{display:flex;align-items:center;gap:6px;}
-  .goal-box input{
-    width:64px;padding:7px 8px;border:1px solid var(--hairline);border-radius:7px;
-    font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:right;
-  }
-  .goal-box .unit{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);}
-
-  .summary-row{display:flex;gap:10px;margin-bottom:18px;}
+  /* Progress tab */
+  .summary-row{display:flex;gap:10px;margin-bottom:14px;}
   .summary-card{
-    flex:1;background:var(--paper-raised);border:1px solid var(--hairline);
-    border-radius:12px;padding:12px 14px;
+    flex:1;background:var(--card);border:none;box-shadow:0 4px 14px rgba(120,90,180,0.08);
+    border-radius:14px;padding:12px 14px;
   }
-  .summary-card .num{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:22px;color:var(--basil);}
-  .summary-card .lbl{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+  .summary-card .num{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:22px;}
+  .summary-card .lbl{font-size:11px;color:var(--ink-soft);margin-top:2px;}
 
   .chart-box{
-    background:var(--paper-raised);border:1px solid var(--hairline);
-    border-radius:14px;padding:16px 14px 10px;margin-bottom:20px;
+    background:var(--card);border:none;box-shadow:0 4px 14px rgba(120,90,180,0.08);
+    border-radius:18px;padding:16px 14px 10px;margin-bottom:20px;
   }
   .chart-box h3{
-    font-family:'Fraunces',serif;font-size:16px;margin:0 0 12px;font-weight:600;
+    font-family:'Fredoka',sans-serif;font-size:16px;margin:0 0 12px;font-weight:600;
+    display:flex;align-items:center;gap:6px;
   }
 
   /* Settings */
   .settings-toggle{
-    position:fixed;top:20px;right:20px;background:var(--paper-raised);
-    border:1px solid var(--hairline);border-radius:50%;width:38px;height:38px;
+    position:fixed;top:20px;right:20px;background:var(--card);
+    box-shadow:0 4px 14px rgba(120,90,180,0.12);
+    border:none;border-radius:50%;width:38px;height:38px;
     display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;
   }
   .settings-panel{
-    position:fixed;inset:0;background:rgba(31,42,36,0.4);display:none;
+    position:fixed;inset:0;background:rgba(42,33,64,0.45);display:none;
     align-items:flex-end;justify-content:center;z-index:10;
   }
   .settings-panel.open{display:flex;}
   .settings-card{
-    background:var(--paper-raised);width:100%;max-width:560px;
-    border-radius:18px 18px 0 0;padding:22px 20px 30px;
+    background:var(--card);width:100%;max-width:560px;
+    border-radius:22px 22px 0 0;padding:22px 20px 30px;max-height:85vh;overflow-y:auto;
   }
-  .settings-card h2{font-family:'Fraunces',serif;font-size:20px;margin:0 0 4px;}
+  .settings-card h2{font-family:'Fredoka',sans-serif;font-size:19px;margin:18px 0 4px;}
+  .settings-card h2:first-child{margin-top:0;}
   .settings-card p{font-size:13px;color:var(--ink-soft);margin:0 0 14px;line-height:1.5;}
   .settings-card input, .settings-card select{
-    width:100%;padding:10px 12px;border:1px solid var(--hairline);border-radius:8px;
-    font-family:'IBM Plex Mono',monospace;font-size:13px;margin-bottom:12px;
+    width:100%;padding:10px 12px;border:1px solid var(--hairline);border-radius:10px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;margin-bottom:10px;
   }
-  .settings-card a{color:var(--basil);}
+  .settings-card a{color:var(--mint);}
+  .goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;}
+  .goal-field label{font-size:11px;color:var(--ink-soft);display:block;margin-bottom:3px;}
+  .goal-field{margin-bottom:2px;}
 </style>
 </head>
 <body>
@@ -258,7 +208,7 @@
 <div class="wrap">
   <header>
     <p class="eyebrow">Dagboek</p>
-    <h1>Wat heb je gegeten?</h1>
+    <h1>Wat heb je gegeten? 🍽️</h1>
     <div class="tabs">
       <div class="tab active" id="tabDagboek" onclick="switchTab('dagboek')">Dagboek</div>
       <div class="tab" id="tabVoortgang" onclick="switchTab('voortgang')">Voortgang</div>
@@ -281,29 +231,26 @@
       <textarea id="mealInput" placeholder="bijv. twee eieren, een boterham met kaas en een koffie met melk" onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();logMeal();}"></textarea>
       <div class="log-actions">
         <span class="hint" id="hint">Beschrijf het in gewone woorden</span>
-        <button class="primary" id="logBtn" onclick="logMeal()">Toevoegen</button>
+        <button class="primary" id="logBtn" onclick="logMeal()">Toevoegen ✨</button>
       </div>
     </div>
 
-    <div class="facts">
-      <div class="facts-title" id="factsTitle">Totalen vandaag</div>
-      <div class="facts-row total"><span class="label">Calorieën</span><span class="value" id="totalCals">0</span></div>
-      <div class="facts-row"><span class="label">Vet</span><span class="value" id="totalFat">0 g</span></div>
-      <div class="facts-row sub"><span class="label">waarvan verzadigd</span><span class="value" id="totalSatFat">0 g</span></div>
-      <div class="facts-row"><span class="label">Koolhydraten</span><span class="value" id="totalCarbs">0 g</span></div>
-      <div class="facts-row sub"><span class="label">waarvan suikers</span><span class="value" id="totalSugar">0 g</span></div>
-      <div class="facts-row sub"><span class="label">vezels</span><span class="value" id="totalFiber">0 g</span></div>
-      <div class="facts-row"><span class="label">Eiwitten</span><span class="value" id="totalProtein">0 g</span></div>
-      <div class="facts-row"><span class="label">Natrium</span><span class="value" id="totalSodium">0 mg</span></div>
+    <div class="bars-card">
+      <div class="bars-card-title" id="factsTitle">Richtlijnen vandaag</div>
+      <div class="bars-card-sub">Op basis van algemene richtlijnen voor een vrouw van 24 — <a onclick="openSettings()">pas aan</a></div>
+
+      <div id="primaryBars"></div>
+
+      <div class="bars-sub-grid" id="secondaryBars"></div>
     </div>
 
     <div class="legend">
-      <div class="legend-item"><span class="legend-dot" style="background:var(--basil)"></span>eiwit</div>
-      <div class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>koolhydraat</div>
-      <div class="legend-item"><span class="legend-dot" style="background:var(--teal)"></span>groente/fruit</div>
-      <div class="legend-item"><span class="legend-dot" style="background:var(--slate)"></span>zuivel</div>
-      <div class="legend-item"><span class="legend-dot" style="background:var(--plum)"></span>vet/olie</div>
-      <div class="legend-item"><span class="legend-dot" style="background:var(--tomato)"></span>snack/suiker</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--mint)"></span>eiwit</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--gold)"></span>koolhydraat</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#4FBEDB"></span>groente/fruit</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#7BA3D6"></span>zuivel</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--lav)"></span>vet/olie</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--coral)"></span>snack/suiker</div>
     </div>
 
     <div class="entries-title" id="entriesTitle">Maaltijden</div>
@@ -312,27 +259,22 @@
 
   <!-- VOORTGANG VIEW -->
   <div class="view" id="viewVoortgang">
-    <div class="goal-box">
-      <label>Eiwitdoel per dag</label>
-      <div class="goal-input-row">
-        <input type="number" id="proteinGoalInput" min="0" step="5" onchange="updateProteinGoal()">
-        <span class="unit">gram</span>
-      </div>
-    </div>
 
-    <div class="summary-row">
-      <div class="summary-card">
-        <div class="num" id="avgProtein">0 g</div>
-        <div class="lbl">gem. eiwit / dag (14d)</div>
+    <div class="chart-box">
+      <h3>🔥 Calorieën — laatste 14 dagen</h3>
+      <div class="summary-row">
+        <div class="summary-card"><div class="num" id="avgCals" style="color:var(--coral)">0</div><div class="lbl">gem. kcal / dag</div></div>
+        <div class="summary-card"><div class="num" id="goalHitDaysCals" style="color:var(--coral)">0/14</div><div class="lbl">dagen binnen richtlijn</div></div>
       </div>
-      <div class="summary-card">
-        <div class="num" id="goalHitDays">0/14</div>
-        <div class="lbl">dagen doel gehaald</div>
-      </div>
+      <div id="calorieChart"></div>
     </div>
 
     <div class="chart-box">
-      <h3>Eiwitinname — laatste 14 dagen</h3>
+      <h3>💪 Eiwit — laatste 14 dagen</h3>
+      <div class="summary-row">
+        <div class="summary-card"><div class="num" id="avgProtein" style="color:var(--mint)">0 g</div><div class="lbl">gem. eiwit / dag</div></div>
+        <div class="summary-card"><div class="num" id="goalHitDaysProtein" style="color:var(--mint)">0/14</div><div class="lbl">dagen doel gehaald</div></div>
+      </div>
       <div id="proteinChart"></div>
     </div>
   </div>
@@ -347,7 +289,21 @@
       <option value="gemini-2.5-flash-lite">gemini-2.5-flash-lite (snelst, meeste gratis aanvragen)</option>
       <option value="gemini-2.5-flash">gemini-2.5-flash (nauwkeuriger)</option>
     </select>
-    <button class="primary" style="width:100%" onclick="saveSettings()">Opslaan</button>
+
+    <h2>Richtlijnen</h2>
+    <p>Standaardwaarden zijn algemene richtlijnen voor een volwassen vrouw (24 jaar, licht actief) volgens het Voedingscentrum. Dit is algemene informatie, geen persoonlijk voedingsadvies — pas gerust aan naar jouw situatie.</p>
+    <div class="goal-grid">
+      <div class="goal-field"><label>Calorieën (kcal)</label><input type="number" id="goalCalories"></div>
+      <div class="goal-field"><label>Eiwit (g)</label><input type="number" id="goalProtein"></div>
+      <div class="goal-field"><label>Koolhydraten (g)</label><input type="number" id="goalCarbs"></div>
+      <div class="goal-field"><label>Vet (g)</label><input type="number" id="goalFat"></div>
+      <div class="goal-field"><label>Verzadigd vet max (g)</label><input type="number" id="goalSatFat"></div>
+      <div class="goal-field"><label>Suikers max (g)</label><input type="number" id="goalSugar"></div>
+      <div class="goal-field"><label>Vezels min (g)</label><input type="number" id="goalFiber"></div>
+      <div class="goal-field"><label>Natrium max (mg)</label><input type="number" id="goalSodium"></div>
+    </div>
+
+    <button class="primary" style="width:100%;margin-top:16px" onclick="saveSettings()">Opslaan</button>
   </div>
 </div>
 
@@ -355,43 +311,75 @@
 const STORAGE_KEY = 'ledger_entries_v1';
 const SETTINGS_KEY = 'ledger_settings_v1';
 const DAY_MS = 86400000;
+
+// Default guidelines: general reference values for an adult woman (Voedingscentrum-based, ~2000 kcal)
+const DEFAULT_GOALS = {
+  calorieGoal: 2000,
+  proteinGoal: 55,
+  carbGoal: 260,
+  fatGoal: 70,
+  satFatMax: 22,
+  sugarMax: 50,
+  fiberGoal: 30,
+  sodiumMax: 2400
+};
+
 const CATEGORY_COLORS = {
-  eiwit: {bg:'var(--basil-soft)', fg:'var(--basil)'},
-  koolhydraat: {bg:'var(--amber-soft)', fg:'var(--amber)'},
-  groente_fruit: {bg:'var(--teal-soft)', fg:'var(--teal)'},
-  zuivel: {bg:'var(--slate-soft)', fg:'var(--slate)'},
-  vet: {bg:'var(--plum-soft)', fg:'var(--plum)'},
-  snack_suiker: {bg:'#FBEAE7', fg:'var(--tomato)'},
-  overig: {bg:'var(--slate-soft)', fg:'var(--slate)'}
+  eiwit: {bg:'var(--mint-soft)', fg:'var(--mint)'},
+  koolhydraat: {bg:'var(--gold-soft)', fg:'var(--gold)'},
+  groente_fruit: {bg:'#E3F6FA', fg:'#4FBEDB'},
+  zuivel: {bg:'#EAF1FB', fg:'#7BA3D6'},
+  vet: {bg:'var(--lav-soft)', fg:'var(--lav)'},
+  snack_suiker: {bg:'var(--coral-soft)', fg:'var(--coral)'},
+  overig: {bg:'#EEEAF7', fg:'#9A93B0'}
 };
 
 let viewingOffset = 0;
 let activeTab = 'dagboek';
 
 function getSettings(){
-  try{ return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; }catch(e){ return {}; }
+  try{
+    const s = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {};
+    return {...DEFAULT_GOALS, ...s};
+  }catch(e){ return {...DEFAULT_GOALS}; }
 }
 function saveSettings(){
   const apiKey = document.getElementById('apiKeyInput').value.trim();
   const model = document.getElementById('modelSelect').value;
   const current = getSettings();
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify({...current, apiKey, model}));
+  const updated = {
+    ...current,
+    apiKey, model,
+    calorieGoal: parseFloat(document.getElementById('goalCalories').value) || DEFAULT_GOALS.calorieGoal,
+    proteinGoal: parseFloat(document.getElementById('goalProtein').value) || DEFAULT_GOALS.proteinGoal,
+    carbGoal: parseFloat(document.getElementById('goalCarbs').value) || DEFAULT_GOALS.carbGoal,
+    fatGoal: parseFloat(document.getElementById('goalFat').value) || DEFAULT_GOALS.fatGoal,
+    satFatMax: parseFloat(document.getElementById('goalSatFat').value) || DEFAULT_GOALS.satFatMax,
+    sugarMax: parseFloat(document.getElementById('goalSugar').value) || DEFAULT_GOALS.sugarMax,
+    fiberGoal: parseFloat(document.getElementById('goalFiber').value) || DEFAULT_GOALS.fiberGoal,
+    sodiumMax: parseFloat(document.getElementById('goalSodium').value) || DEFAULT_GOALS.sodiumMax
+  };
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(updated));
   closeSettings();
+  renderDagboek();
+  if(activeTab === 'voortgang') renderVoortgang();
 }
 function openSettings(){
   const s = getSettings();
   if(s.apiKey) document.getElementById('apiKeyInput').value = s.apiKey;
   if(s.model) document.getElementById('modelSelect').value = s.model;
+  document.getElementById('goalCalories').value = s.calorieGoal;
+  document.getElementById('goalProtein').value = s.proteinGoal;
+  document.getElementById('goalCarbs').value = s.carbGoal;
+  document.getElementById('goalFat').value = s.fatGoal;
+  document.getElementById('goalSatFat').value = s.satFatMax;
+  document.getElementById('goalSugar').value = s.sugarMax;
+  document.getElementById('goalFiber').value = s.fiberGoal;
+  document.getElementById('goalSodium').value = s.sodiumMax;
   document.getElementById('settingsPanel').classList.add('open');
 }
 function closeSettings(){
   document.getElementById('settingsPanel').classList.remove('open');
-}
-function updateProteinGoal(){
-  const val = parseFloat(document.getElementById('proteinGoalInput').value) || 0;
-  const current = getSettings();
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify({...current, proteinGoal: val}));
-  renderVoortgang();
 }
 
 function switchTab(tab){
@@ -417,7 +405,7 @@ function keyForOffset(offset){
 function setHint(text, isError){
   const hint = document.getElementById('hint');
   hint.textContent = text;
-  hint.style.color = isError ? 'var(--tomato)' : 'var(--ink-soft)';
+  hint.style.color = isError ? 'var(--warn)' : 'var(--ink-soft)';
 }
 
 function changeDay(delta){
@@ -473,7 +461,7 @@ async function logMeal(){
     setHint('Kon dit niet verwerken — probeer het anders of controleer je API-sleutel', true);
   }finally{
     btn.disabled = false;
-    btn.textContent = 'Toevoegen';
+    btn.textContent = 'Toevoegen ✨';
   }
 }
 
@@ -580,8 +568,41 @@ function dayDateStr(offset){
   return d.toLocaleDateString('nl-NL', {day:'numeric', month:'long', year:'numeric'});
 }
 
+// mode: 'max' = going over is bad (calories, fat, satfat, sugar, sodium)
+// mode: 'min' = reaching/exceeding is good (protein, fiber)
+function barColor(pct, mode){
+  if(mode === 'min'){
+    if(pct >= 100) return 'var(--mint)';
+    if(pct >= 50) return 'var(--gold)';
+    return 'var(--coral)';
+  }
+  if(pct > 110) return 'var(--warn)';
+  if(pct > 90) return 'var(--gold)';
+  return 'var(--mint)';
+}
+
+function renderBar(label, icon, value, goal, unit, mode, compact){
+  const pct = goal > 0 ? (value / goal) * 100 : 0;
+  const displayPct = Math.min(pct, 100);
+  const color = barColor(pct, mode);
+  const isOver = mode === 'max' && pct > 100;
+  const valText = `${Math.round(value)} / ${Math.round(goal)} ${unit}`;
+  return `
+    <div class="bar-row">
+      <div class="bar-top">
+        <span class="bar-label">${icon} ${label}</span>
+        <span class="bar-value ${isOver ? 'over' : ''}">${valText}${isOver ? ' ⚠️' : ''}</span>
+      </div>
+      <div class="bar-track" style="height:${compact ? '9px' : '12px'}">
+        <div class="bar-fill" style="width:${displayPct}%;background:${color}"></div>
+      </div>
+    </div>
+  `;
+}
+
 function renderDagboek(){
   const entries = getEntries();
+  const settings = getSettings();
   const key = keyForOffset(viewingOffset);
   const dayEntries = entries.filter(e => e.timestamp.slice(0,10) === key);
 
@@ -589,7 +610,7 @@ function renderDagboek(){
   document.getElementById('dayDate').textContent = dayDateStr(viewingOffset);
   document.getElementById('nextBtn').disabled = viewingOffset >= 0;
   document.getElementById('todayJump').style.display = viewingOffset === 0 ? 'none' : 'block';
-  document.getElementById('factsTitle').textContent = viewingOffset === 0 ? 'Totalen vandaag' : 'Totalen — ' + dayLabel(viewingOffset).toLowerCase();
+  document.getElementById('factsTitle').textContent = viewingOffset === 0 ? 'Richtlijnen vandaag' : 'Richtlijnen — ' + dayLabel(viewingOffset).toLowerCase();
   document.getElementById('entriesTitle').textContent = dayEntries.length ? 'Maaltijden' : '';
 
   const totals = dayEntries.reduce((acc, e) => {
@@ -604,20 +625,23 @@ function renderDagboek(){
     return acc;
   }, {cals:0, protein:0, carbs:0, fat:0, satFat:0, fiber:0, sugar:0, sodium:0});
 
-  document.getElementById('totalCals').textContent = Math.round(totals.cals);
-  document.getElementById('totalProtein').textContent = Math.round(totals.protein) + ' g';
-  document.getElementById('totalCarbs').textContent = Math.round(totals.carbs) + ' g';
-  document.getElementById('totalFat').textContent = Math.round(totals.fat) + ' g';
-  document.getElementById('totalSatFat').textContent = Math.round(totals.satFat) + ' g';
-  document.getElementById('totalFiber').textContent = Math.round(totals.fiber) + ' g';
-  document.getElementById('totalSugar').textContent = Math.round(totals.sugar) + ' g';
-  document.getElementById('totalSodium').textContent = Math.round(totals.sodium) + ' mg';
+  document.getElementById('primaryBars').innerHTML =
+    renderBar('Calorieën', '🔥', totals.cals, settings.calorieGoal, 'kcal', 'max', false) +
+    renderBar('Eiwit', '💪', totals.protein, settings.proteinGoal, 'g', 'min', false) +
+    renderBar('Koolhydraten', '🌾', totals.carbs, settings.carbGoal, 'g', 'max', false) +
+    renderBar('Vet', '🥑', totals.fat, settings.fatGoal, 'g', 'max', false);
+
+  document.getElementById('secondaryBars').innerHTML =
+    renderBar('Verzadigd vet', '🧈', totals.satFat, settings.satFatMax, 'g', 'max', true) +
+    renderBar('Suikers', '🍬', totals.sugar, settings.sugarMax, 'g', 'max', true) +
+    renderBar('Vezels', '🌿', totals.fiber, settings.fiberGoal, 'g', 'min', true) +
+    renderBar('Natrium', '🧂', totals.sodium, settings.sodiumMax, 'mg', 'max', true);
 
   const container = document.getElementById('entriesContainer');
   container.innerHTML = '';
 
   if(dayEntries.length === 0){
-    container.innerHTML = `<div class="empty">${viewingOffset === 0 ? 'Nog niets gelogd — beschrijf hierboven je eerste maaltijd.' : 'Geen maaltijden gelogd op deze dag.'}</div>`;
+    container.innerHTML = `<div class="empty">${viewingOffset === 0 ? 'Nog niets gelogd — beschrijf hierboven je eerste maaltijd. 🌱' : 'Geen maaltijden gelogd op deze dag.'}</div>`;
     return;
   }
 
@@ -643,12 +667,12 @@ function renderDagboek(){
   });
 }
 
-function proteinSeries(days){
+function macroSeries(days, macroField){
   const entries = getEntries();
   const totalsByDay = {};
   entries.forEach(e => {
     const key = e.timestamp.slice(0,10);
-    totalsByDay[key] = (totalsByDay[key] || 0) + (e.total_protein_g || 0);
+    totalsByDay[key] = (totalsByDay[key] || 0) + (e[macroField] || 0);
   });
   const series = [];
   for(let offset = -(days - 1); offset <= 0; offset++){
@@ -663,20 +687,9 @@ function proteinSeries(days){
   return series;
 }
 
-function renderVoortgang(){
-  const settings = getSettings();
-  const goal = settings.proteinGoal || 100;
-  document.getElementById('proteinGoalInput').value = goal;
-
-  const series = proteinSeries(14);
-  const avg = series.reduce((s,d) => s + d.value, 0) / series.length;
-  const hitDays = series.filter(d => d.value >= goal).length;
-
-  document.getElementById('avgProtein').textContent = Math.round(avg) + ' g';
-  document.getElementById('goalHitDays').textContent = hitDays + '/14';
-
+function renderTrendChart(containerId, series, goal, mode, colorAbove, colorMid, colorBelow){
   const maxVal = Math.max(goal * 1.25, ...series.map(d => d.value), 1);
-  const w = 320, h = 150, barGap = 4;
+  const w = 320, h = 130, barGap = 4;
   const barW = (w / series.length) - barGap;
   const goalY = h - (goal / maxVal) * h;
 
@@ -685,19 +698,44 @@ function renderVoortgang(){
     const barH = (d.value / maxVal) * h;
     const x = idx * (barW + barGap);
     const y = h - barH;
-    const color = d.value >= goal ? 'var(--basil)' : (d.value >= goal * 0.7 ? 'var(--amber)' : 'var(--tomato)');
-    bars += `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(barH,2)}" rx="3" fill="${color}"></rect>`;
+    let color;
+    if(mode === 'min'){
+      color = d.value >= goal ? colorAbove : (d.value >= goal * 0.7 ? colorMid : colorBelow);
+    }else{
+      const pct = (d.value / goal) * 100;
+      color = pct > 110 ? colorBelow : (pct > 90 ? colorMid : colorAbove);
+    }
+    bars += `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(barH,2)}" rx="4" fill="${color}"></rect>`;
     bars += `<text x="${x + barW/2}" y="${h + 16}" text-anchor="middle" font-size="9" font-family="IBM Plex Mono, monospace" fill="var(--ink-soft)">${d.label}</text>`;
   });
 
-  const chartHtml = `
+  document.getElementById(containerId).innerHTML = `
     <svg viewBox="0 0 ${w} ${h + 24}" width="100%" style="overflow:visible">
       <line x1="0" y1="${goalY}" x2="${w}" y2="${goalY}" stroke="var(--ink-soft)" stroke-width="1" stroke-dasharray="4 3"></line>
-      <text x="${w}" y="${goalY - 5}" text-anchor="end" font-size="10" font-family="IBM Plex Mono, monospace" fill="var(--ink-soft)">doel ${goal}g</text>
+      <text x="${w}" y="${goalY - 5}" text-anchor="end" font-size="10" font-family="IBM Plex Mono, monospace" fill="var(--ink-soft)">doel ${Math.round(goal)}</text>
       ${bars}
     </svg>
   `;
-  document.getElementById('proteinChart').innerHTML = chartHtml;
+}
+
+function renderVoortgang(){
+  const settings = getSettings();
+
+  // Calories
+  const calSeries = macroSeries(14, 'total_calories');
+  const avgCals = calSeries.reduce((s,d) => s + d.value, 0) / calSeries.length;
+  const calHits = calSeries.filter(d => d.value > 0 && d.value <= settings.calorieGoal * 1.1).length;
+  document.getElementById('avgCals').textContent = Math.round(avgCals);
+  document.getElementById('goalHitDaysCals').textContent = calHits + '/14';
+  renderTrendChart('calorieChart', calSeries, settings.calorieGoal, 'max', 'var(--mint)', 'var(--gold)', 'var(--warn)');
+
+  // Protein
+  const proteinSeries = macroSeries(14, 'total_protein_g');
+  const avgProtein = proteinSeries.reduce((s,d) => s + d.value, 0) / proteinSeries.length;
+  const proteinHits = proteinSeries.filter(d => d.value >= settings.proteinGoal).length;
+  document.getElementById('avgProtein').textContent = Math.round(avgProtein) + ' g';
+  document.getElementById('goalHitDaysProtein').textContent = proteinHits + '/14';
+  renderTrendChart('proteinChart', proteinSeries, settings.proteinGoal, 'min', 'var(--mint)', 'var(--gold)', 'var(--coral)');
 }
 
 renderDagboek();
